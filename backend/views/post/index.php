@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Poststatus;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -7,7 +8,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\PostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '文章列表';
+$this->title = '文章管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-index">
@@ -22,16 +23,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
+            ['attribute'=>'id','contentOptions'=>['width'=>'30px']],
             'title',
-            'content:ntext',
+            ['attribute'=>'authorName','label'=>'作者','value'=>'author.nickname'],
+            //'content:ntext',
             'tags:ntext',
-            'status',
+            //'status',
+            ['attribute'=>'status','value'=>'status0.name',
+                'filter'=> Poststatus::find()
+                    ->select(['name','id'])
+                    ->orderBy('position')
+                    ->indexBy('id')
+                    ->column(),
+            ],
             // 'create_time:datetime',
-            // 'update_time:datetime',
-            // 'author_id',
+             'update_time:datetime',
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
