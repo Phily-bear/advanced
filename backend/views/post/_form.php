@@ -1,5 +1,9 @@
 <?php
 
+use common\models\Adminuser;
+use common\models\Poststatus;
+use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -18,16 +22,43 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tags')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'create_time')->textInput() ?>
+        <?php
+//        第一种方法
+        $records = Poststatus::find()->all();
+        $arr = ArrayHelper::map($records, 'id', 'name');
+//        第二种方法
+        $all = Yii::$app->db->createCommand('select id,name from poststatus')->queryAll();
+        $arr1 = ArrayHelper::map($all, 'id', 'name');
 
-    <?= $form->field($model, 'update_time')->textInput() ?>
+//        第三种方法
+        $all1 = (new Query())->select(['name','id'])->from('poststatus')->indexBy('id')->column();
+//        echo "<pre>";
+//        print_r($all1);
+//        echo "</pre>";
+//        exit(0);
+//        第四种方法
+        $arr2 = Poststatus::find()->select(['name', 'id'])->indexBy('id')->column();
+//        echo "<pre>";
+//        print_r($arr2);
+//        echo "</pre>";
+//        exit(0);
+        ?>
 
-    <?= $form->field($model, 'author_id')->textInput() ?>
+
+    <?= $form->field($model,'status')->dropDownList(
+        Poststatus::find()->select(['name', 'id'])->orderBy('position')->indexBy('id')->column(),
+        ['prompt'=>'请选择状态']
+    );?>
+
+
+    <?= $form->field($model, 'author_id')->dropDownList(
+            Adminuser::find()->select(['nickname','id'])->indexBy('id')->column(),
+        ['prompt'=>'请选择作者']
+    ) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '新增' : '修改', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
