@@ -1,5 +1,6 @@
 <?php
 
+use frontend\components\TagsCloudWidget;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ListView;
@@ -53,7 +54,9 @@ use yii\widgets\ListView;
                         <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>标签云
                     </li>
 
-                    <li class="list-group-item">搜索框</li>
+                    <li class="list-group-item">
+                        <?= TagsCloudWidget::widget(['tags'=>$tags])?>
+                    </li>
                 </ul>
             </div>
             <div class="commentbox">
