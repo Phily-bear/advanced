@@ -1,6 +1,6 @@
 <?php
 
-use frontend\components\TagsCloudWidget;
+use frontend\components\RctReplyWidget;use frontend\components\TagsCloudWidget;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ListView;
@@ -65,7 +65,9 @@ use yii\widgets\ListView;
                         <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>最新回复
                     </li>
 
-                    <li class="list-group-item">搜索框</li>
+                    <li class="list-group-item">
+                        <?= RctReplyWidget::widget(['recentComments'=>$recentComments])?>
+                    </li>
                 </ul>
             </div>
 
