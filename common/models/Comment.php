@@ -61,7 +61,7 @@ class Comment extends \yii\db\ActiveRecord
             'email' => 'Email',
             'url' => 'Url',
             'post_id' => '文章',
-            'remind' => 'Remind',
+            'remind' => '是否提醒',
         ];
     }
 
