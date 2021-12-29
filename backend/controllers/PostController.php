@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Tag;
 use Yii;
 use common\models\Post;
 use common\models\PostSearch;
@@ -28,20 +29,23 @@ class PostController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-
+            //权限设置
+            //?表示未登录用户 @表示已登录用户
             'access'=>[
                 'class'=>AccessControl::className(),
                 'rules'=>[
                     [
+                        //未登录用户可以访问index页面和view页面
                         'actions'=>['index','view'],
                         'allow'=>true,
                         'roles'=>['?'],
                     ],
                     [
-                        'actions'=>['view','index','create','update'],
+                        //已登录用户可以访问view index create update delete页面
+                        'actions'=>['index','view','create','update','delete'],
                         'allow'=>true,
                         'roles'=>['@'],
-                    ],
+                    ]
                 ]
             ],
         ];
@@ -49,16 +53,18 @@ class PostController extends Controller
 
     /**
      * Lists all Post models.
-     * @return mixed
+     * @return string
      */
     public function actionIndex()
     {
+
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+
         ]);
     }
 
@@ -66,15 +72,10 @@ class PostController extends Controller
      * Displays a single Post model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
-//        $post = Yii::$app->db->createCommand('select * from post')->queryAll();
-//        var_dump($post);
-//        exit(0);
-//        $model = Post::find()->where(['status' => 2])->all();
-//        var_dump($model);
-//        exit(0);
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -88,9 +89,11 @@ class PostController extends Controller
      */
     public function actionCreate()
     {
+        //权限检查
         if (!Yii::$app->user->can('createPost')){
-            throw new ForbiddenHttpException("对不起，你没有进行该操作的权限");
+            throw new ForbiddenHttpException('你没有进行该操作的权限');
         }
+
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -107,13 +110,18 @@ class PostController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws ForbiddenHttpException
      */
     public function actionUpdate($id)
     {
         if (!Yii::$app->user->can('updatePost')){
-            throw new ForbiddenHttpException("对不起，你没有进行该操作的权限");
+            throw new ForbiddenHttpException('你没有进行该操作的权限');
         }
+
         $model = $this->findModel($id);
+
+//        $model->update_time = time();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -128,12 +136,14 @@ class PostController extends Controller
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws ForbiddenHttpException
      */
     public function actionDelete($id)
     {
         if (!Yii::$app->user->can('deletePost')){
-            throw new ForbiddenHttpException("对不起，你没有进行该操作的权限");
+            throw new ForbiddenHttpException('你没有进行该操作的权限');
         }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

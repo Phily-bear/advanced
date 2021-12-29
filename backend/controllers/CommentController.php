@@ -123,13 +123,19 @@ class CommentController extends Controller
         }
     }
 
-    public function actionApprove($id){
+    /**
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
+     */
+    public function actionApprove($id)
+    {
         if (!Yii::$app->user->can('commentAuditor')){
-            throw new ForbiddenHttpException("对不起，你没有进行该操作的权限");
+            throw new ForbiddenHttpException('你没有进行该操作的权限');
         }
-        $model=$this->findModel($id);
-        //审核
-        if ($model->approve()){
+
+        $model = $this->findModel($id);
+        if ($model->approve())  //审核成功
+        {
             return $this->redirect(['index']);
         }
     }

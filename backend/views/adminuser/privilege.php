@@ -1,42 +1,32 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use common\models\Adminuser;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Adminuser */
+/* @var $id backend\controllers\AdminuserController */
+/* @var $AuthAssignmentArray backend\controllers\AdminuserController */
+/* @var $allPrivilegesArray backend\controllers\AdminuserController */
 
-/** @var TYPE_NAME $id */
-$model = Adminuser::findOne($id);
-
-$this->title = '权限设置: ' . $model->username;
-$this->params['breadcrumbs'][] = ['label' => '管理员', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $id]];
+$model = \common\models\Adminuser::findOne($id);
+$this->title = '权限管理: ' . $model->username;
+$this->params['breadcrumbs'][] = ['label' => '权限管理', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $id, 'url' => ['view', 'id' => $id]];
 $this->params['breadcrumbs'][] = '权限设置';
 ?>
-
-<div class="adminuser-update">
+<div class="adminuser-privilege-form">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php $form = ActiveForm::begin(); ?>
 
-    <div class="adminuser-privilege-form">
+    <?= Html::checkboxList('newPri',$AuthAssignmentArray,$allPrivilegesArray);?>
 
-        <?php $form = ActiveForm::begin(); ?>
-
-        <?= /** @var TYPE_NAME $AuthAssignmentArray */
-        /** @var TYPE_NAME $allPrivilegesArray */
-        Html::checkboxList('newPri',$AuthAssignmentArray,$allPrivilegesArray);?>
-
-        <div class="form-group">
-            <?= Html::submitButton('设置') ?>
-        </div>
-
-        <?php ActiveForm::end(); ?>
-
+    <div class="form-group">
+        <?= Html::submitButton('确认' ,['class' => 'btn btn-success']) ?>
     </div>
 
-
+    <?php ActiveForm::end(); ?>
 
 </div>

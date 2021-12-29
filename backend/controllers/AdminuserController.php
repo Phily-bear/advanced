@@ -69,8 +69,8 @@ class AdminuserController extends Controller
     {
         $model = new SignupForm();
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            if($user = $model->signup())
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup())
             {
                 return $this->redirect(['view', 'id' => $user->id]);
             }
@@ -79,6 +79,63 @@ class AdminuserController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionResetpwd($id)
+    {
+        $model = new ResetpwdForm();
+        if ($model->load(Yii::$app->request->post()))
+        {
+            if ($adminuser = $model->resetPassword($id))
+            {
+                return $this->redirect(['index']);
+            }
+        }
+        return $this->render('resetpwd',['model'=>$model]);
+    }
+
+    public function actionPrivilege($id)
+    {
+        //找出所有权限，提供给checkboxList
+        $allPrivileges = AuthItem::find()->select(['name','description'])
+            ->where(['type'=>1])->orderBy('description')->all();
+        foreach($allPrivileges as $pri){
+            $allPrivilegesArray[$pri->name] = $pri->description;
+        }
+
+        //当前用户权限
+        $authAssignments = AuthAssignment::find()->select(['item_name'])
+            ->where(['user_id'=>$id])->all();
+        $authAssignmentsArray = array();
+        foreach ($authAssignments as $authAssignment)
+        {
+            array_push($authAssignmentsArray,$authAssignment->item_name);
+        }
+
+        //从表单提交的数据，来更新AuthAssignment表，从而使用户的角色发生变化
+        if (isset($_POST['newPri']))
+        {
+            //清除原先此用户的权限
+            AuthAssignment::deleteAll('user_id=:id',[':id'=>$id]);
+            $newPri = $_POST['newPri'];
+            $arrLength = count($newPri);
+
+            //增加新条目
+            for ($x = 0;$x<$arrLength;$x++)
+            {
+                $aPri = new AuthAssignment();
+                $aPri->item_name = $newPri[$x];
+                $aPri->user_id = $id;
+                $aPri->created_at = time();
+                $aPri->save();
+            }
+            return $this->redirect(['index']);
+        }
+
+
+
+        return $this->render('privilege',['id'=>$id,'AuthAssignmentArray'=>$authAssignmentsArray,
+            'allPrivilegesArray'=>$allPrivilegesArray]);
     }
 
     /**
@@ -127,70 +184,5 @@ class AdminuserController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionResetpwd($id)
-    {
-        $model = new ResetpwdForm();
-
-        if ($model->load(Yii::$app->request->post()) ) {
-            if ($model->resetPassword($id)){
-                return $this->redirect(['index']);
-            }
-        } else {
-            return $this->render('resetpwd', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    public function actionPrivilege($id)
-    {
-        //step1. 找出所有权限,提供给checkboxlist
-        $allPrivileges = AuthItem::find()->select(['name','description'])
-            ->where(['type'=>1])->orderBy('description')->all();
-
-        foreach ($allPrivileges as $pri)
-        {
-            $allPrivilegesArray[$pri->name]=$pri->description;
-        }
-        //step2. 当前用户的权限
-
-        $AuthAssignments=AuthAssignment::find()->select(['item_name'])
-            ->where(['user_id'=>$id])->orderBy('item_name')->all();
-
-        $AuthAssignmentsArray = array();
-
-        foreach ($AuthAssignments as $AuthAssignment)
-        {
-            array_push($AuthAssignmentsArray,$AuthAssignment->item_name);
-        }
-
-        //step3. 从表单提交的数据,来更新AuthAssignment表,从而用户的角色发生变化
-        if(isset($_POST['newPri']))
-        {
-            AuthAssignment::deleteAll('user_id=:id',[':id'=>$id]);
-
-            $newPri = $_POST['newPri'];
-
-            $arrlength = count($newPri);
-
-            for($x=0;$x<$arrlength;$x++)
-            {
-                $aPri = new AuthAssignment();
-                $aPri->item_name = $newPri[$x];
-                $aPri->user_id = $id;
-                $aPri->created_at = time();
-
-                $aPri->save();
-            }
-            return $this->redirect(['index']);
-        }
-
-        //step4. 渲染checkBoxList表单
-
-        return $this->render('privilege',['id'=>$id,'AuthAssignmentArray'=>$AuthAssignmentsArray,
-            'allPrivilegesArray'=>$allPrivilegesArray]);
-
     }
 }
