@@ -1,7 +1,9 @@
 <?php
 
+use common\models\Post;
 use frontend\components\RctReplyWidget;
 use frontend\components\TagsCloudWidget;
+use yii\caching\DbDependency;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ListView;
@@ -36,7 +38,17 @@ use yii\widgets\ListView;
             <div class="search-group">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查找文章
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查找文章(
+                        <?php
+                            $data=Yii::$app->cache->get('postCount');
+                            $dependency=new DbDependency(['sql'=>'select count(id) from post']);
+                            if ($data==false){
+                                $data= Post::find()->count();
+                                Yii::$app->cache->set('postCount',$data,600,$dependency);
+                            }
+                            echo $data;
+                        ?>
+                        )
                     </li>
 
                     <li class="list-group-item">
@@ -56,7 +68,16 @@ use yii\widgets\ListView;
                     </li>
 
                     <li class="list-group-item">
-                        <?= TagsCloudWidget::widget(['tags'=>$tags])?>
+                        <?php
+                        //片段缓存示例代码
+//                        $dependency=new DbDependency(['sql'=>'select count(id) from post']);
+//                        if ($this->beginCache('cache',['duration'=>600],['dependency'=>$dependency])){
+//                            echo TagsCloudWidget::widget(['tags'=>$tags]);
+//                            $this->endCache();
+//                        }
+
+                        ?>
+                        <?= TagsCloudWidget::widget(['tags'=>$tags]);?>
                     </li>
                 </ul>
             </div>

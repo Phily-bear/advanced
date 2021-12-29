@@ -8,6 +8,8 @@ use common\models\User;
 use Yii;
 use common\models\Post;
 use common\models\PostSearch;
+use yii\db\Query;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -29,6 +31,48 @@ class PostController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'rules'=>[
+                    [
+                        'actions'=>['index'],
+                        'allow'=>true,
+                        'roles'=>['?'],
+                    ],
+                    [
+                        'actions'=>['index','detail'],
+                        'allow'=>true,
+                        'roles'=>['@'],
+                    ],
+                ],
+            ],
+            'pageCache'=>[
+                'class'=>'yii\filters\PageCache',
+                'only'=>['index'],
+                'duration'=>600,
+                'variations'=>[
+                    Yii::$app->request->get('page'),
+                    Yii::$app->request->get('PostSearch'),
+                ],
+                'dependency'=>[
+                  'class'=>'yii\caching\DbDependency',
+                  'sql'=>'select count(id) from post',
+                ],
+            ],
+            'httpCache'=>[
+                'class'=>'yii\filters\HttpCache',
+                'only'=>['detail'],
+                'lastModified'=>function($action,$params){
+                    $q=new Query();
+                    return $q->from('post')->max('update_time');
+                },
+                'etagSeed'=>function($action,$params){
+                    $post=$this->findModel(Yii::$app->request->get('id'));
+                    return serialize([$post->title,$post->content]);
+                },
+                'cacheControlHeader'=>'public,max-age=600',
             ],
         ];
     }
