@@ -17,7 +17,8 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-swiftmailer": "*"
+        "yiisoft/yii2-swiftmailer": "*",
+        "kucha/ueditor": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
@@ -26,7 +27,10 @@
         "yiisoft/yii2-faker": "*"
     },
     "config": {
-        "process-timeout": 1800
+        "process-timeout": 1800,
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
     },
     "extra": {
         "asset-installer-paths": {

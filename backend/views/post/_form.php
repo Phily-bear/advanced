@@ -18,7 +18,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model,'content')
+        ->widget('kucha\ueditor\UEditor',[
+            'clientOptions'=>[
+                'initialFrameHeight'=>'200',
+                'lang'=>'zh-cn',
+
+            ]
+        ]) ?>
 
     <?= $form->field($model, 'tags')->textarea(['rows' => 6]) ?>
 
