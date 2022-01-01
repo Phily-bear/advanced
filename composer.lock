@@ -310,13 +310,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/hisune/Echarts-PHP/zipball/8cf5001029839c601ce5d813ab92e6403b647798",
                 "reference": "8cf5001029839c601ce5d813ab92e6403b647798",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -366,13 +360,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/BigKuCha/yii2-ueditor-widget/zipball/59e4ab2533bec1b182ce38241a1567e78d57a509",
                 "reference": "59e4ab2533bec1b182ce38241a1567e78d57a509",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "type": "library",
             "autoload": {
