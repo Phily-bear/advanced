@@ -115,35 +115,35 @@ AppAsset::register($this);
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="<?=Yii::$app->homeUrl ?>">
+                <a class="nav-link collapsed" href="<?=Yii::$app->homeUrl ?>">
                     <i class="bi bi-grid"></i>
                     <span>统计页面</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link " href="<?=Yii::$app->homeUrl ?>?r=post/index">
+                <a class="nav-link collapsed" href="<?=Yii::$app->homeUrl ?>?r=post/index">
                     <i class="bi bi-grid"></i>
                     <span>文章管理</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link " href="<?=Yii::$app->homeUrl ?>?r=comment/index">
+                <a class="nav-link collapsed" href="<?=Yii::$app->homeUrl ?>?r=comment/index">
                     <i class="bi bi-grid"></i>
                     <span>评论管理</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link " href="<?=Yii::$app->homeUrl ?>?r=user/index">
+                <a class="nav-link collapsed" href="<?=Yii::$app->homeUrl ?>?r=user/index">
                     <i class="bi bi-grid"></i>
                     <span>用户管理</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link " href="<?=Yii::$app->homeUrl ?>?r=adminuser/index">
+                <a class="nav-link collapsed" href="<?=Yii::$app->homeUrl ?>?r=adminuser/index">
                     <i class="bi bi-grid"></i>
                     <span>管理员</span>
                 </a>

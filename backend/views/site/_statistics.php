@@ -3,7 +3,7 @@
 
 ?>
 
-<div class="col-xxl-6 col-md-3">
+<div class="col-xxl-3 col-md-3">
     <div class="card info-card sales-card">
         <div class="card-body">
             <h5 class="card-title">用户 <span>| Today</span></h5>

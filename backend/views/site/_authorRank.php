@@ -14,7 +14,7 @@
 //        var_dump($authors);
 ?>
 
-    <div class="card recent-sales col-xxl-8 col-md-6">
+    <div class="card recent-sales col-xxl-3 col-md-3">
         <div class="card-body">
             <h5 class="card-title">作者 <span>| Today</span></h5>
 
@@ -24,7 +24,7 @@
                     <th scope="col">#</th>
                     <th scope="col">作者</th>
                     <th scope="col">文章数</th>
-                    <th scope="col">获得评论数</th>
+<!--                    <th scope="col">获得评论数</th>-->
 <!--                    <th scope="col">Status</th>-->
                 </tr>
                 </thead>
@@ -36,7 +36,7 @@
                     <th scope="row"><?= $i++ ?></a></th>
                     <td><a href="#" class="text-primary"><?= $author['nickname'] ?></a></td>
                     <td><?= $author['postSum'] ?></td>
-                    <td>$64</td>
+<!--                    <td>$64</td>-->
 <!--                    <td><button class="badge bg-danger ">Approved</button></td>-->
                 </tr>
                 <?php endforeach; ?>

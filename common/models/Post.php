@@ -16,6 +16,7 @@ use yii\helpers\Html;
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $author_id
+ * @property integer $read
  *
  * @property Comment[] $comments
  * @property Adminuser $author
@@ -39,7 +40,7 @@ class Post extends \yii\db\ActiveRecord{
         return [
             [['title', 'content', 'status', 'author_id'], 'required'],
             [['content', 'tags'], 'string'],
-            [['status', 'create_time', 'update_time', 'author_id'], 'integer'],
+            [['status', 'create_time', 'update_time', 'author_id', 'read'], 'integer'],
             [['title'], 'string', 'max' => 128],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Poststatus::className(), 'targetAttribute' => ['status' => 'id']],
@@ -60,6 +61,7 @@ class Post extends \yii\db\ActiveRecord{
             'create_time' => '创建时间',
             'update_time' => '修改时间',
             'author_id' => '作者',
+            'read' => '阅读量',
         ];
     }
 
@@ -128,6 +130,12 @@ class Post extends \yii\db\ActiveRecord{
         return Yii::$app->urlManager->createUrl(
             ['post/detail','id'=>$this->id,'title'=>$this->title]
         );
+    }
+
+    //阅读量增加
+    public function readUp(){
+        $this->read ++ ;
+        $this->save();
     }
 
     public function getBeginning($length=288){

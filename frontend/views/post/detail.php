@@ -10,6 +10,9 @@ use yii\helpers\HtmlPurifier;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\PostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $model*/
+//阅读量增加1
+$model->readUp();
 
 ?>
 <div class="container ">

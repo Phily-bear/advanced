@@ -12,7 +12,7 @@ $this->title = '后台统计信息';
 <div class="site-index ">
 
     <div class="col-12">
-        <div class="card col-xxl-8 col-md-9">
+        <div class="card col-xxl-9 col-md-9">
         <?php
         $postCount = Post::find()->count();
         $commentCount = Comment::find()->count();
@@ -64,11 +64,17 @@ $this->title = '后台统计信息';
         </div>
 
         <?= $this->render('_statistics') ?>
+        <div class="card col-xxl-9 col-md-9">
+            <?= $this->render('_postReadChart') ?>
+        </div>
 
-    </div>
         <?= $this->render('_authorRank') ?>
 
-    <div class="col-12">
+    </div>
+
+
+
+    <div class="col-9">
             <?php
                 $posts = Post::find()->select("create_time")->all();
                 $years = array();
@@ -83,7 +89,8 @@ $this->title = '后台统计信息';
                 <?= $this->render('_postCountCharts', [
                     'year'=>$year,
                 ]) ?>
+                <?php break;?>
             <?php endforeach;  ?>
-        </div>
     </div>
 </div>
+
