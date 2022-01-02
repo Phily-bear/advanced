@@ -20,9 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            ['attribute'=>'id','contentOptions'=>['width'=>'30px']],
             //'content:ntext',
             ['attribute'=>'content',
                 'value'=>'beginning',
@@ -34,7 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             //'userid',
-            ['attribute'=>'user.username','label'=>'作者','value'=>'user.username'],
+            ['attribute'=>'user.username',
+                'label'=>'用户','value'=>'user.username',
+                'contentOptions'=>['width'=>'50px'],],
             //'status',
             ['attribute'=>'status',
                 'value'=>'status0.name',
@@ -56,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'remind',
 
             ['class' => 'yii\grid\ActionColumn',
-                'template'=>'{view}{update}{delete}{approve}',
+                'template'=>'{view}{delete}{approve}',
                 'buttons'=>[
                        'approve'=>function($url,$model,$key){
                             $options=[
@@ -66,9 +68,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data-method'=>'post',
                                 'data-pjax'=>'0',
                             ];
-                            return Html::a('<span class="glyphicon glyphicon-check"></span>',$url,$options);
+                            return " ".Html::a('<span class="glyphicon glyphicon-check"> </span>',$url,$options);
                        }
                 ],
+                'contentOptions'=>['width'=>'60px'],
             ],
         ],
     ]); ?>

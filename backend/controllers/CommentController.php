@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Comment;
 use common\models\CommentSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -26,6 +27,25 @@ class CommentController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+            //权限设置
+            //?表示未登录用户 @表示已登录用户
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'rules'=>[
+                    [
+                        //未登录用户可以访问index页面和view页面
+                        'actions'=>['index','view'],
+                        'allow'=>true,
+                        'roles'=>['?'],
+                    ],
+                    [
+                        //已登录用户可以访问view index create update delete页面
+                        'actions'=>['index','view','create','update','delete'],
+                        'allow'=>true,
+                        'roles'=>['@'],
+                    ]
+                ]
             ],
         ];
     }
@@ -83,6 +103,11 @@ class CommentController extends Controller
      */
     public function actionUpdate($id)
     {
+        //权限检查
+        if (!Yii::$app->user->can('approveComment')){
+            throw new ForbiddenHttpException('你没有进行该操作的权限');
+        }
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -102,6 +127,11 @@ class CommentController extends Controller
      */
     public function actionDelete($id)
     {
+        //权限检查
+        if (!Yii::$app->user->can('approveComment')){
+            throw new ForbiddenHttpException('你没有进行该操作的权限');
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
