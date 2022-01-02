@@ -9,10 +9,10 @@ use Hisune\EchartsPHP\ECharts;
 
 $this->title = '后台统计信息';
 ?>
-<div class="site-index">
+<div class="site-index ">
 
-    <div class="body-content">
-        <div class="">
+    <div class="col-12">
+        <div class="card col-xxl-8 col-md-9">
         <?php
         $postCount = Post::find()->count();
         $commentCount = Comment::find()->count();
@@ -26,6 +26,8 @@ $this->title = '后台统计信息';
         $chart->legend->data[] = '数量';
         $chart->legend->left = 'right';
         $chart->legend->inactiveColor = '#548047';
+//        var_dump($chart->getOption());;
+
 
         $chart->xAxis[] = array(
             'type' => 'value'
@@ -60,8 +62,13 @@ $this->title = '后台统计信息';
         echo $chart->render('simple-custom-id');
         ?>
         </div>
-        <br/><br/><br/><br/><br/><br/>
-        <div>
+
+        <?= $this->render('_statistics') ?>
+
+    </div>
+        <?= $this->render('_authorRank') ?>
+
+    <div class="col-12">
             <?php
                 $posts = Post::find()->select("create_time")->all();
                 $years = array();

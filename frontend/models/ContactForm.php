@@ -37,8 +37,16 @@ class ContactForm extends Model
      */
     public function attributeLabels()
     {
+//        public $name;
+//        public $email;
+//        public $subject;
+//        public $body;
+//        public $verifyCode;
         return [
-            'verifyCode' => 'Verification Code',
+            'verifyCode' =>'验证码',
+            'name'=>'姓名',
+            'subject'=>'专业',
+            'body'=>'内容',
         ];
     }
 

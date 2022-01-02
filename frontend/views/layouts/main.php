@@ -32,27 +32,41 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/blog.css");
 <body>
 <?php $this->beginBody() ?>
 
-//header是导航栏部分
+<!--header是导航栏部分-->
 <header class="gird-header">
     <div class="header-fixed">
         <div class="header-inner">
             <a href="<?=Yii::$app->homeUrl ?>" class="header-logo" id="logo">BlogDemo2</a>
             <nav class="nav" id="nav">
-                <ul>
+                <ul >
                     <li><a href="<?=Yii::$app->homeUrl ?>?r=site/about">关于我们</a></li>
                     <li><a href="<?=Yii::$app->homeUrl ?>?r=site/contact">联系我们</a></li>
+                    <?php if(Yii::$app->user->isGuest): ?>
+                    <li >
+                        <a href="<?=Yii::$app->homeUrl ?>?r=site/signup" >注册</a>
+                    </li>
+                    <li >
+                        <a href="<?=Yii::$app->homeUrl ?>?r=site/login" >登录</a>
+                    </li>
+                    <?php endif; ?>
 
-                    //还差登录和注册
-                    <?php if(Yii::$app->user->isGuest){ ?>
-
-                    <?php }else{?>
-
-                    <?php } ?>
                 </ul>
             </nav>
-            <a href="/User/QQLogin" class="blog-user">
-                <i class="fa fa-qq"></i>
+            <a href="" class="blog-user">
+                <?php if(!Yii::$app->user->isGuest): ?>
+                    <li>
+                        <form action="<?= Yii::$app->homeUrl ?>?r=site/logout" method="post"
+                              id="test">
+                            <input type="hidden"
+                                   name="_csrf" id="_csrf"
+                                   value="<?= Yii::$app->request->csrfToken ?>">
+                            <input type="submit" id="submit" class="btn btn-danger"
+                                   value="注销（<?= Yii::$app->user->identity->username ?>）"/>
+                        </form>
+                    </li>
+                <?php endif; ?>
             </a>
+
         </div>
     </div>
 </header>

@@ -13,10 +13,11 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/xadmin.css");
 AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/font.css");
 AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/login.css");
 
+$this->title = '登录';
 ?>
 <div >
-    <div class="login layui-anim layui-anim-up ">
-        <div class="message">博客系统登录</div>
+    <div class="login   ">
+        <div class="message">后台系统登录</div>
         <div id="darkbannerwrap"></div>
         <?php $form = ActiveForm::begin(['id' => 'login-form',
             'options' => [
@@ -33,7 +34,6 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/login.css");
         <div class="form-group">
             <?= Html::submitButton('登录', ['class' => 'lay-submit', 'name' => 'login-button','style'=>[
                 'display'=>'inline-block' ,
-                'vertical-align'=>'middle' ,
                 'padding'=>'12px 24px',
                 'width'=>'100%',
                 'margin'=>'0px',

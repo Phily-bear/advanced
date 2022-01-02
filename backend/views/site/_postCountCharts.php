@@ -3,7 +3,10 @@
 use common\models\Post;
 use Hisune\EchartsPHP\ECharts;
 /* @var $year */
+?>
 
+<div class="col-md-12 card">
+<?php
     //$nowYear = date('Y',time());
     $nowYear = $year;
 
@@ -48,3 +51,4 @@ use Hisune\EchartsPHP\ECharts;
     );
     echo $chart->render('second'.$nowYear);
 ?>
+</div>
