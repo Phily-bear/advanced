@@ -12,12 +12,6 @@ use common\widgets\Alert;
 
 AppAsset::register($this);
 
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/font-awesome/css/font-awesome.min.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/layui/css/layui.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/master.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/gloable.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/nprogress.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/blog.css");
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -71,38 +65,6 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/blog.css");
     </div>
 </header>
 <div class="wrap">
-    <?php
-//    NavBar::begin([
-//        'brandLabel' => 'BlogDemo2',
-//        'brandOptions'=>['style'=>'color:yellow;font-size:23px'],
-//        'brandUrl' => Yii::$app->homeUrl,
-//        'options' => [
-//            'class' => 'navbar-inverse navbar-fixed-top',
-//        ],
-//    ]);
-//    $menuItems = [
-//        ['label' => '关于我们', 'url' => ['/site/about']],
-//        ['label' => '联系我们', 'url' => ['/site/contact']],
-//    ];
-//    if (Yii::$app->user->isGuest) {
-//        $menuItems[] = ['label' => '注册', 'url' => ['/site/signup']];
-//        $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
-//    } else {
-//        $menuItems[] = '<li>'
-//            . Html::beginForm(['/site/logout'], 'post')
-//            . Html::submitButton(
-//                '退出 (' . Yii::$app->user->identity->username . ')',
-//                ['class' => 'btn btn-link']
-//            )
-//            . Html::endForm()
-//            . '</li>';
-//    }
-//    echo Nav::widget([
-//        'options' => ['class' => 'navbar-nav navbar-right'],
-//        'items' => $menuItems,
-//    ]);
-//    NavBar::end();
-    ?>
 
     <div class="container">
         <div class="container-fixed">
@@ -115,13 +77,24 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/blog.css");
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy;BlogDemo2<?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+<footer class="grid-footer">
+    <div class="footer-fixed">
+        <div class="copyright">
+            <div class="info">
+                <div class="contact">
+                    <a href="javascript:void(0)" class="github" target="_blank"><i class="fa fa-github"></i></a>
+                    <a href="https://wpa.qq.com/msgrd?v=3&uin=1692894189&site=qq&menu=yes" class="qq" target="_blank" title="1692894189"><i class="fa fa-qq"></i></a>
+                    <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=g7K1urG7ureyu7rD8vKt4Ozu" class="email" target="_blank" title="1692894189@qq.com"><i class="fa fa-envelope"></i></a>
+                    <a href="javascript:void(0)" class="weixin"><i class="fa fa-weixin"></i></a>
+                </div>
+                <p class="mt05">
+                    Copyright &copy; 2021-2022 web实践博客 All Rights Reserved V.3.1.3 Power by csj-yh
+                </p>
+            </div>
+        </div>
     </div>
 </footer>
+
 
 <?php $this->endBody() ?>
 </body>

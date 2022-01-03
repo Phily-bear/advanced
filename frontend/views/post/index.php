@@ -15,12 +15,6 @@ use yii\widgets\ListView;
 
 AppAsset::register($this);
 
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/font-awesome/css/font-awesome.min.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/layui/css/layui.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/master.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/gloable.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/nprogress.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/blog.css");
 $this->title='文章列表';
 
 ?>

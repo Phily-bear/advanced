@@ -7,12 +7,7 @@ use yii\helpers\Url;
 
 AppAsset::register($this);
 
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/font-awesome/css/font-awesome.min.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/layui/css/layui.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/master.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/gloable.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/nprogress.css");
-AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/blog.css");
+
 ?>
 
 <section class="article-item zoomIn article">
@@ -46,6 +41,10 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/blog.css");
             <a class="tag"><?= implode('',$model->tagLinks);?></a>
         </div>
         <div class="f-fr">
+            <span class="read">
+                <i class="fa fa-eye fs-16"></i>
+                <i class="num"><?= $model->read?></i>
+            </span>
             <span class="ml20">
                 <i class="fa fa-comments fs-16"></i>
                 <?= Html::a("评论({$model->commentCount})",$model->url.'#comments')?>|最后修改于<?= date('Y-m_s H:i:s',$model->update_time)?>
