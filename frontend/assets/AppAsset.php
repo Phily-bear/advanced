@@ -26,6 +26,7 @@ class AppAsset extends AssetBundle
         'js/yss/gloable.js',
         'js/plugins/nprogress.js',
         'js/yss/article.js',
+
     ];
 
 

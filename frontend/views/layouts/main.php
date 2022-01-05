@@ -22,6 +22,9 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+
+
+
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -82,10 +85,10 @@ AppAsset::register($this);
         <div class="copyright">
             <div class="info">
                 <div class="contact">
-                    <a href="javascript:void(0)" class="github" target="_blank"><i class="fa fa-github"></i></a>
+                    <a href="https://github.com/wanliu2021" class="github" target="_blank"><i class="fa fa-github"></i></a>
                     <a href="https://wpa.qq.com/msgrd?v=3&uin=1692894189&site=qq&menu=yes" class="qq" target="_blank" title="1692894189"><i class="fa fa-qq"></i></a>
                     <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=g7K1urG7ureyu7rD8vKt4Ozu" class="email" target="_blank" title="1692894189@qq.com"><i class="fa fa-envelope"></i></a>
-                    <a href="javascript:void(0)" class="weixin"><i class="fa fa-weixin"></i></a>
+<!--                    <a href="javascript:void(0)" class="weixin"><i class="fa fa-weixin"></i></a>-->
                 </div>
                 <p class="mt05">
                     Copyright &copy; 2021-2022 web实践博客 All Rights Reserved V.3.1.3 Power by csj-yh
@@ -98,5 +101,30 @@ AppAsset::register($this);
 
 <?php $this->endBody() ?>
 </body>
+
+<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+    L2Dwidget.init({
+        "model": {
+            jsonPath: "https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json",
+            "scale": 1
+        },
+        "display": {
+            "position": "left", //看板娘的表现位置
+            "width": 150,  //小萝莉的宽度
+            "height": 300, //小萝莉的高度
+            "hOffset": 0,//小萝莉的X偏移量
+            "vOffset": -20//小萝莉的Y偏移量
+        },
+        "mobile": {
+            "show": true,
+            "scale": 0.5
+        },
+        "react": {
+            "opacityDefault": 0.7,//小萝莉的透明度
+            "opacityOnHover": 0.2
+        }
+    });
+</script>
 </html>
 <?php $this->endPage() ?>
