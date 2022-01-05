@@ -22,12 +22,9 @@ $this->title = '后台统计信息';
         $chart->tooltip->show = true;
         $chart->title->text = '博客统计';
         $chart->title->left = 'center';
-//        $chart->color = ['blue','red','yellow'];
         $chart->legend->data[] = '数量';
         $chart->legend->left = 'right';
         $chart->legend->inactiveColor = '#548047';
-//        var_dump($chart->getOption());;
-
 
         $chart->xAxis[] = array(
             'type' => 'value'
@@ -83,7 +80,6 @@ $this->title = '后台统计信息';
                     $years[$year] = $year;
                 }
                 $years = array_reverse($years);
-//                var_dump($years);
             ?>
             <?php foreach ($years as $year): ?>
                 <?= $this->render('_postCountCharts', [

@@ -22,38 +22,9 @@ use Hisune\EchartsPHP\ECharts;
             $yearPostCount[$month-1] ++ ;
         }
     }
-    //            var_dump($yearPostCount);
-
-//    $chart = new ECharts();
-//    $chart->tooltip->show = true;
-//    $chart->title->text = $nowYear.'-文章统计';
-//    $chart->title->left = 'center';
-//    //        $chart->color = ['blue','red','yellow'];
-//    $chart->legend->data[] = '篇数';
-//    $chart->legend->left = 'right';
-//    $chart->legend->inactiveColor = '#548047';
-//
-//    $chart->xAxis[] = array(
-//        'type' => 'category',
-//        'data' => [$nowYear.'-'.'01',$nowYear.'-'.'02',$nowYear.'-'.'03',
-//            $nowYear.'-'.'04',$nowYear.'-'.'05',$nowYear.'-'.'06',
-//            $nowYear.'-'.'07',$nowYear.'-'.'08',$nowYear.'-'.'09',
-//            $nowYear.'-'.'10',$nowYear.'-'.'11',$nowYear.'-'.'12',]
-//
-//    );
-//    $chart->yAxis[] = array(
-//        'type' => 'value'
-//    );
-//    $chart->series[] = array(
-//        'name' => '篇数',
-//        'type' => 'line',
-//        'data' => $yearPostCount
-//    );
 
     $yearPostCountStr = implode(',',$yearPostCount);
-//    var_dump($yearPostCountStr);
 
-//    echo $chart->render('second'.$nowYear);
 ?>
 
     <div class="card-body">

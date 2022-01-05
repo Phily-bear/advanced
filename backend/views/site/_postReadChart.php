@@ -4,11 +4,6 @@
         ->orderBy('read desc')
         ->all();
 
-
-//    var_dump($posts);
-//    var_dump($posts[0]['title']);
-//    var_dump($posts[0]['read']);
-
     $postsTitle = array();
     $postsRead = array();
 
@@ -16,8 +11,6 @@
         $postsTitle[$i] = $posts[$i]['title'];
         $postsRead[$i] = $posts[$i]['read'];
     }
-//    var_dump($postsTitle);
-//    var_dump($postsRead);
 
     $postsTitleStr = implode(',',$postsTitle);
     $postsReadStr = implode(',',$postsRead);

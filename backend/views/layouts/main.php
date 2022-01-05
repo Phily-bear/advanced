@@ -167,7 +167,7 @@ AppAsset::register($this);
 
 <footer id="footer" class="footer">
     <div class="copyright">
-        © Copyright <strong><span></span></strong>. All Rights Reserved
+         <strong><span>Copyright ©</span></strong>. 2021-2022 web实践博客 All Rights Reserved V.3.1.3 Power by csj-yh
     </div>
 </footer>
 
